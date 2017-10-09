@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/marmelo&#34;&gt;Rafael Marmelo&lt;/a&gt; 2017</copyright>
-    <lastBuildDate>Wed, 03 Oct 2012 23:56:00 +0100</lastBuildDate>
+    <lastBuildDate>Fri, 23 Nov 2012 01:44:00 +0100</lastBuildDate>
     
 	<atom:link href="http://defying.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Integrating Java with Bash pipes</title>
+      <link>http://defying.me/posts/2012-11-23-integrating-java-with-bash-pipes/</link>
+      <pubDate>Fri, 23 Nov 2012 01:44:00 +0100</pubDate>
+      
+      <guid>http://defying.me/posts/2012-11-23-integrating-java-with-bash-pipes/</guid>
+      <description>For testing purpose we will try to develop a simple Java class to replicate the GNU grep behavior. Lets take the following grep as the test baseline.
+$ cat /proc/cpuinfo | grep &amp;quot;model name&amp;quot; model name : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz model name : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz model name : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz model name : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz  grep receives a pattern and uses it to filter lines from stdin and place them into stdout.</description>
+    </item>
     
     <item>
       <title>How to generate RPMs from R modules</title>

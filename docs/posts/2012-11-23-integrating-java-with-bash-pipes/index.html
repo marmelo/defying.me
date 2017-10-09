@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Integrating Java with Bash pipes | defying.me</title>
+<link rel="stylesheet" href="http://defying.me/css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="http://defying.me"><h1 class="title is-4">defying.me</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/marmelo">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/rmarmelo">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.facebook.com/rafael.marmelo">
+            <span class="icon">
+              <i class="fa fa-facebook-official"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/rmarmelo/">
+            <span class="icon">
+              <i class="fa fa-instagram"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.linkedin.com/in/rafaelmarmelo/">
+            <span class="icon">
+              <i class="fa fa-linkedin"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">November 23, 2012</h2>
+    <h1 class="title">Integrating Java with Bash pipes</h1>
+    <div class="content">
+      <p>For testing purpose we will try to develop a simple Java class to replicate the GNU <code>grep</code> behavior.
+Lets take the following <code>grep</code> as the test baseline.</p>
+
+<pre><code>$ cat /proc/cpuinfo | grep &quot;model name&quot;
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+</code></pre>
+
+<p><code>grep</code> receives a pattern and uses it to filter lines from <code>stdin</code> and place them into <code>stdout</code>.
+Pretty straightforward, right? The following Java class tries to accomplish just that.</p>
+
+<pre><code>package me.defying.jgrep;
+ 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.Reader;
+ 
+public class JGrep {
+ 
+    public static void main(String[] args) throws IOException {
+        Reader reader = new InputStreamReader(System.in);
+        BufferedReader in = new BufferedReader(reader);
+ 
+        String line;
+        while ((line = in.readLine()) != null) {
+            if (args.length == 0 || line.contains(args[0])) {
+                System.out.println(line);
+            }
+        }
+    }
+}
+</code></pre>
+
+<p>It is time to tryout our new Java <code>grep</code>, <code>jgrep</code> for friends.</p>
+
+<pre><code>$ javac me/defying/jgrep/JGrep.java
+</code></pre>
+
+<pre><code>$ cat /proc/cpuinfo | java me.defying.jgrep.JGrep &quot;model name&quot;
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+</code></pre>
+
+<p>Yey! Same output.</p>
+
+<p>If the application we are developing is going to be used on a daily basis we need a more convenient way to execute it. For instance, we may create an alias in our <code>.bashrc</code> file or even create an executable script and put it in our <code>$PATH</code> environment variable.</p>
+
+<pre><code>$ alias jgrep=&quot;java me.defying.jgrep.JGrep&quot;
+$ cat /proc/cpuinfo | jgrep &quot;model name&quot;
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz
+</code></pre>
+
+<p>To wrap things up, we may add new pipes to our <code>jgrep</code> output.</p>
+
+<pre><code>$ cat /proc/cpuinfo | jgrep &quot;model name&quot; | wc
+      4      36     216
+</code></pre>
+
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/marmelo">Rafael Marmelo</a> 2017</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+
