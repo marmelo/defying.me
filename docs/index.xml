@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; &lt;a href=&#34;https://github.com/marmelo&#34;&gt;Rafael Marmelo&lt;/a&gt; 2017</copyright>
-    <lastBuildDate>Wed, 03 Oct 2012 10:58:00 +0100</lastBuildDate>
+    <lastBuildDate>Wed, 03 Oct 2012 23:56:00 +0100</lastBuildDate>
     
 	<atom:link href="http://defying.me/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to generate RPMs from R modules</title>
+      <link>http://defying.me/posts/2012-10-03-how-to-generate-rpms-from-r-modules/</link>
+      <pubDate>Wed, 03 Oct 2012 23:56:00 +0100</pubDate>
+      
+      <guid>http://defying.me/posts/2012-10-03-how-to-generate-rpms-from-r-modules/</guid>
+      <description>Today I was setting up a CentOS server with some packages including R and a couple of R modules. R is generally available from third-party repositories like EPEL but its modules must be compiled locally, which requires a lot of dependencies like R-devel and GCC.
+As I wanted to keep the number of installed packages as low as possible there was the need to generate RPMs from the R modules allowing me to just install them in the very secure and lightweight server.</description>
+    </item>
     
     <item>
       <title>9ticks - The Web as a Stream</title>

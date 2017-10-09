@@ -2,7 +2,7 @@
 <html lang="en">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>defying.me</title>
+<title>How to generate RPMs from R modules | defying.me</title>
 <link rel="stylesheet" href="http://defying.me/css/style.css">
 <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
 
@@ -62,67 +62,41 @@
 
 <section class="section">
   <div class="container">
-    
-    <article>
-      <h2 class="subtitle is-6">October 3, 2012</h2>
-      <h1 class="title"><a href="http://defying.me/posts/2012-10-03-how-to-generate-rpms-from-r-modules/">How to generate RPMs from R modules</a></h1>
-      <div class="content">
-        Today I was setting up a CentOS server with some packages including R and a couple of R modules. R is generally available from third-party repositories like EPEL but its modules must be compiled locally, which requires a lot of dependencies like R-devel and GCC.
-As I wanted to keep the number of installed packages as low as possible there was the need to generate RPMs from the R modules allowing me to just install them in the very secure and lightweight server.
-        
-        ...<a class="button is-link" href="http://defying.me/posts/2012-10-03-how-to-generate-rpms-from-r-modules/" style="height:28px">
-          Read more
-          <span class="icon is-small">
-            <i class="fa fa-angle-double-right"></i>
-          </span>
-        </a>
-        
-      </div>
-    </article>
-    
-    <article>
-      <h2 class="subtitle is-6">October 3, 2012</h2>
-      <h1 class="title"><a href="http://defying.me/posts/2012-10-03-9ticks-the-web-as-a-stream/">9ticks - The Web as a Stream</a></h1>
-      <div class="content">
-        Almost three years have passed and I keep reminiscing my computer science internship.
-Final Report | DAIT 2009 Paper | Screenshot | Presentation Demo
+    <h2 class="subtitle is-6">October 3, 2012</h2>
+    <h1 class="title">How to generate RPMs from R modules</h1>
+    <div class="content">
+      <p>Today I was setting up a CentOS server with some packages including <a href="http://www.r-project.org/">R</a> and a couple of R modules.
+R is generally available from third-party repositories like <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> but its modules must be compiled locally, which requires a lot of dependencies like R-devel and GCC.</p>
+
+<p>As I wanted to keep the number of installed packages as low as possible there was the need to generate RPMs from the R modules allowing me to just install them in the very secure and lightweight server.</p>
+
+<p>After some searching I came across <a href="https://fedorahosted.org/r2spec/">R2spec</a> which is a tool just for what I need.
+It worked like a charm, but not at first.</p>
+
+<p>For instance, lets see what we need to do in order to generate the <a href="http://cran.r-project.org/web/packages/randomForest/">randomForest</a> RPM.</p>
+
+<pre><code># install packages (from the EPEL repository)
+yum install R-devel R2spec rpm-build
  
-        
-      </div>
-    </article>
-    
+# create environment
+rm -Rf ~/rpmbuild
+mkdir -p ~/rpmbuild/SPECS
+mkdir -p ~/rpmbuild/SOURCES/
+ 
+# download and generate spec and rpm
+R2rpm -p randomForest --no-suggest --no-check --verbose
+ 
+# the generated rpm may be found at
+ls ~/rpmbuild/RPMS/x86_64/R-randomForest-4.6.6-1.el6.x86_64.rpm
+ 
+# install rpm in the final machine
+rpm -i R-randomForest-4.6.6-1.el6.x86_64.rpm
+</code></pre>
+
+    </div>
   </div>
 </section>
-<section class="section">
-  <div class="container">
-    <nav class="level is-mobile">
-      <div class="level-left">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-left"></i>
-            </span>
-            Newer
-          </a>
-          
-        </div>
-      </div>
-      <div class="level-right is-marginless">
-        <div class="level-item">
-          
-          <a class="button is-disabled">
-            Older
-            <span class="icon is-small is-marginless">
-              <i class="fa fa-angle-right"></i>
-            </span>
-          </a>
-          
-        </div>
-      </div>
-    </nav>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="container has-text-centered">
