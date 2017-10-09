@@ -5,7 +5,7 @@ description = "a dump from my transient memory"
 theme = "hemingway"
 copyright = "&copy; <a href=\"https://github.com/marmelo\">Rafael Marmelo</a> 2017"
 disqusShortname = ""
-googleAnalytics = ""
+googleAnalytics = "UA-107773762-1"
 publishDir = "docs"
 
 [params]
