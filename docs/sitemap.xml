@@ -3,7 +3,18 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://defying.me/posts/2012-10-03-9ticks-the-web-as-a-stream/</loc>
+    <lastmod>2012-10-03T10:58:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://defying.me/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://defying.me/posts/</loc>
+    <lastmod>2012-10-03T10:58:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -14,6 +25,7 @@
   
   <url>
     <loc>http://defying.me/</loc>
+    <lastmod>2012-10-03T10:58:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
