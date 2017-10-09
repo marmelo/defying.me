@@ -1,3 +1,38 @@
-baseURL = "http://example.org/"
-languageCode = "en-us"
-title = "My New Hugo Site"
+baseurl = "https://defying.me"
+languageCode = "en"
+title = "defying.me"
+description = "a dump from my transient memory"
+theme = "hemingway"
+copyright = "&copy; <a href=\"https://github.com/marmelo\">Rafael Marmelo</a> 2017"
+disqusShortname = ""
+googleAnalytics = ""
+
+[params]
+
+[params.highlight]
+style = "github"
+languages = ["go", "dockerfile"]
+
+[[params.social]]
+url = "https://github.com/marmelo"
+fa_icon = "fa-github"
+
+[[params.social]]
+url = "https://twitter.com/rmarmelo"
+fa_icon = "fa-twitter"
+
+[[params.social]]
+url = "https://www.facebook.com/rafael.marmelo"
+fa_icon = "fa-facebook-official"
+
+[[params.social]]
+url = "https://www.instagram.com/rmarmelo/"
+fa_icon = "fa-instagram"
+
+[[params.social]]
+url = "https://www.linkedin.com/in/rafaelmarmelo/"
+fa_icon = "fa-linkedin"
+
+[[params.social]]
+url = "/index.xml"
+fa_icon = "fa-rss"
