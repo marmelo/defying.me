@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plotting analog readings from Arduino using Matplotlib | defying.me</title>
+<link rel="stylesheet" href="http://defying.me/css/style.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+
+
+<section class="section">
+  <div class="container">
+    <nav class="nav">
+      <div class="nav-left">
+        <a class="nav-item" href="http://defying.me"><h1 class="title is-4">defying.me</h1></a>
+      </div>
+      <div class="nav-right">
+        <nav class="nav-item level is-mobile">
+          
+          <a class="level-item" href="https://github.com/marmelo">
+            <span class="icon">
+              <i class="fa fa-github"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://twitter.com/rmarmelo">
+            <span class="icon">
+              <i class="fa fa-twitter"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.facebook.com/rafael.marmelo">
+            <span class="icon">
+              <i class="fa fa-facebook-official"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.instagram.com/rmarmelo/">
+            <span class="icon">
+              <i class="fa fa-instagram"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="https://www.linkedin.com/in/rafaelmarmelo/">
+            <span class="icon">
+              <i class="fa fa-linkedin"></i>
+            </span>
+          </a>
+          
+          <a class="level-item" href="/index.xml">
+            <span class="icon">
+              <i class="fa fa-rss"></i>
+            </span>
+          </a>
+          
+        </nav>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <h2 class="subtitle is-6">March 10, 2011</h2>
+    <h1 class="title">Plotting analog readings from Arduino using Matplotlib</h1>
+    <div class="content">
+      <p>Uses an LDR (Light Dependent Resistor) to sample readings through the serial port every half second. A Python script reads from the serial port and plots the light intensity using Matplotlib.</p>
+
+<p></p>
+
+<p>Optionally, just for the kicks, there are two LEDs:</p>
+
+<ul>
+<li>Green - Lit when the light intensity is higher than 50%</li>
+<li>Red - Otherwise</li>
+</ul>
+
+<h3 id="components">Components</h3>
+
+<ul>
+<li>LDR</li>
+<li>2.2kΩ Resistor (red-red-red)</li>
+<li>Python (with <a href="http://matplotlib.sourceforge.net/">Matplotlib</a> and <a href="http://pyserial.sourceforge.net/">Serial</a>)</li>
+<li>Red LED (optional)</li>
+<li>Green LED (optional)</li>
+<li>Two 220Ω Resistors (optional, red-red-brown)</li>
+<li><strong>WARNING</strong>: The probability of the resistors being wrong is... extremely high!</li>
+</ul>
+
+<h3 id="schematics">Schematics</h3>
+
+<p><img src="/files/Arduino-plot-04.jpg" alt="" />
+<img src="/files/Arduino-plot-03.jpg" alt="" />
+<img src="/files/Arduino-plot-02.jpg" alt="" />
+<img src="/files/Arduino-plot-01.jpg" alt="" /></p>
+
+<h3 id="arduino-code">Arduino Code</h3>
+
+<pre><code>const int BAUD_RATE = 9600;
+ 
+const int RED = 9;
+const int GREEN = 8;
+const int LDR = 0;
+ 
+void setup()   {
+  pinMode(RED, OUTPUT);
+  pinMode(GREEN, OUTPUT);
+  Serial.begin(BAUD_RATE);
+}
+ 
+void loop()
+{
+  int light = analogRead(LDR);
+ 
+  if (light &gt; 500) {
+    digitalWrite(RED, LOW);
+    digitalWrite(GREEN, HIGH);
+  } else {
+    digitalWrite(RED, HIGH);
+    digitalWrite(GREEN, LOW);
+  }
+ 
+  Serial.println(light);
+  delay(500);
+}
+</code></pre>
+
+<h3 id="python-code">Python Code</h3>
+
+<pre><code>from serial import Serial
+from pylab import *
+ 
+# serial connection to arduino
+arduino = Serial('/dev/ttyUSB0', 9600)
+ 
+# readings
+y = []
+ 
+# empty plot (interactive mode)
+ion()
+plot(y, 'b')
+draw()
+ 
+while True:
+  try:
+    # read from arduino
+    reading = int(arduino.readline())
+    # replot
+    y.append(reading)
+    plot(y, 'b')
+    draw()
+  except ValueError:
+    pass
+</code></pre>
+
+<h3 id="final-result">Final Result</h3>
+
+<p><img src="/files/Arduino-plot.png" alt="" /></p>
+    </div>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container has-text-centered">
+    <p>&copy; <a href="https://github.com/marmelo">Rafael Marmelo</a> 2017</p>
+  </div>
+</section>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/go.min.js"></script>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/dockerfile.min.js"></script>
+
+<script>hljs.initHighlightingOnLoad();</script>
+
+

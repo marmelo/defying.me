@@ -47,5 +47,16 @@ R is generally available from third-party repositories like &lt;a href=&#34;http
 &lt;p&gt;&lt;/p&gt;</description>
     </item>
     
+    <item>
+      <title>Plotting analog readings from Arduino using Matplotlib</title>
+      <link>http://defying.me/posts/2011-03-10-plotting-analog-readings-from-arduino-using-matplotlib/</link>
+      <pubDate>Thu, 10 Mar 2011 23:45:00 +0100</pubDate>
+      
+      <guid>http://defying.me/posts/2011-03-10-plotting-analog-readings-from-arduino-using-matplotlib/</guid>
+      <description>&lt;p&gt;Uses an LDR (Light Dependent Resistor) to sample readings through the serial port every half second. A Python script reads from the serial port and plots the light intensity using Matplotlib.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
   </channel>
 </rss>
