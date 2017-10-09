@@ -7,6 +7,8 @@ draft: false
 Today I was setting up a CentOS server with some packages including [R](http://www.r-project.org/) and a couple of R modules.
 R is generally available from third-party repositories like [EPEL](http://fedoraproject.org/wiki/EPEL) but its modules must be compiled locally, which requires a lot of dependencies like R-devel and GCC.
 
+<!--more-->
+
 As I wanted to keep the number of installed packages as low as possible there was the need to generate RPMs from the R modules allowing me to just install them in the very secure and lightweight server.
 
 After some searching I came across [R2spec](https://fedorahosted.org/r2spec/) which is a tool just for what I need.

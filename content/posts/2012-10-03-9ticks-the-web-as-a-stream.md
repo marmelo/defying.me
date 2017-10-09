@@ -6,6 +6,8 @@ draft: false
 
 Almost three years have passed and I keep reminiscing my computer science internship.
 
+<!--more-->
+
 [Final Report](/files/9ticks.pdf) | 
 [DAIT 2009 Paper](/files/9ticks_DAIT2009.pdf) | 
 [Screenshot](/files/9ticks_Screenshot.png) | 

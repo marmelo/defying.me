@@ -7,6 +7,8 @@ draft: false
 For testing purpose we will try to develop a simple Java class to replicate the GNU `grep` behavior.
 Lets take the following `grep` as the test baseline.
 
+<!--more-->
+
 ```
 $ cat /proc/cpuinfo | grep "model name"
 model name      : Intel(R) Core(TM) i7-2640M CPU @ 2.80GHz

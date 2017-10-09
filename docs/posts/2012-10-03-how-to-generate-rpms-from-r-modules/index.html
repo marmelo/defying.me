@@ -68,6 +68,8 @@
       <p>Today I was setting up a CentOS server with some packages including <a href="http://www.r-project.org/">R</a> and a couple of R modules.
 R is generally available from third-party repositories like <a href="http://fedoraproject.org/wiki/EPEL">EPEL</a> but its modules must be compiled locally, which requires a lot of dependencies like R-devel and GCC.</p>
 
+<p></p>
+
 <p>As I wanted to keep the number of installed packages as low as possible there was the need to generate RPMs from the R modules allowing me to just install them in the very secure and lightweight server.</p>
 
 <p>After some searching I came across <a href="https://fedorahosted.org/r2spec/">R2spec</a> which is a tool just for what I need.
@@ -92,7 +94,6 @@ ls ~/rpmbuild/RPMS/x86_64/R-randomForest-4.6.6-1.el6.x86_64.rpm
 # install rpm in the final machine
 rpm -i R-randomForest-4.6.6-1.el6.x86_64.rpm
 </code></pre>
-
     </div>
   </div>
 </section>
